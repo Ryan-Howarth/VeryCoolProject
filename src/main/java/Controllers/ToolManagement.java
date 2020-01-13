@@ -47,7 +47,7 @@ public class ToolManagement {
         JSONArray list = new JSONArray();
         try {
 
-            PreparedStatement ps = Main.db.prepareStatement("SELECT ToolName FROM Tools");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT ToolName, ToolList FROM Tools WHERE ToolNameID = ?");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();

@@ -49,7 +49,6 @@ public class TaskManagement {
         System.out.println("thing/list");
         JSONArray list = new JSONArray();
         try {
-
             PreparedStatement ps = Main.db.prepareStatement("SELECT Task FROM Tasks");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -91,19 +90,35 @@ public class TaskManagement {
     @Path("deleteTask")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteTask(@FormDataParam("taskid")Integer taskID) {
-        try {
-            if (taskID == null) {
-                throw new Exception("One or more form data parameters are missing in the HTTP request.");
-            }
-            PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Tasks WHERE TaskID = ?");
-            ps.setInt(1, taskID);
-            ps.executeUpdate();
-            return "{\"status\": \"OK\"}";
+    public static String deleteTask(@FormDataParam("tasklist")String[] taskList) {
 
-        } catch (Exception exception) {
-            System.out.println("Database disconnection error: " + exception.getMessage());
-            return "{\"error\": \"Unable to delete item, please see server console for more info.\"}";
+        Integer[] newtasklist=stringToList(taskList);
+
+        for(int i=0;i<newtasklist.length; i++){
+            try {
+                if (taskList == null) {
+                    throw new Exception("One or more form data parameters are missing in the HTTP request.");
+                }
+                PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Tasks WHERE TaskID = ?");
+                ps.setInt(1, newtasklist[i]);
+                ps.executeUpdate();
+                return "{\"status\": \"OK\"}";
+
+            } catch (Exception exception) {
+                System.out.println("Database disconnection error: " + exception.getMessage());
+                return "{\"error\": \"Unable to delete item, please see server console for more info.\"}";
+            }
         }
+        return null;
+    }
+
+    public static Integer[] stringToList(String[] strings) {
+        Integer[] intarray=new Integer[strings.length];
+        int i=0;
+        for(String str:strings){
+            intarray[i]=Integer.parseInt(str.trim());//Exception in this line
+            i++;
+        }
+        return intarray;
     }
 }
