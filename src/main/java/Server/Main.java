@@ -14,12 +14,12 @@ import java.sql.DriverManager;
 
 public class Main {
     public static Connection db = null;
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         openDatabase("Database.db");
         TaskManagement.deleteTask(new String[]{"33"});
         closeDatabase();
     }
-
+   */
     private static void openDatabase(String dbFile) {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -31,7 +31,7 @@ public class Main {
             System.out.println("Database connection error: " + exception.getMessage());
         }
     }
-    /*
+
    public static void main(String[] args) {
 
        openDatabase("Database.db");
@@ -53,7 +53,7 @@ public class Main {
            e.printStackTrace();
        }
    }
-*/
+
     private static void closeDatabase(){
         try {
             db.close();
