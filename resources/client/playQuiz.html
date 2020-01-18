@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html>
 
+<head>
+    <title>Quiz Time!</title>
+    <link rel="stylesheet" type="text/css" href="/client/css/styles.css">
+    <script src="/client/js/js.cookie.js"></script>
+    <script src="/client/js/playquiz.js"></script>
+    <link rel="shortcut icon" href="/client/favicon.ico" type="image/x-icon">
+</head>
+
+<body onload="pageLoad()">
+<h1>Dan "BLANK" Schneider</h1>
+<h2>Fill in the blank.</h2>
+<div id="content2">
+    <div id="testDiv"></div>
+    <div class="genericDiv">
+        <input type="button" value="The man with the van" id="resultsButton" onclick="window.location.href = '/client/results.html'">
+    </div>
+    <div class="genericDiv">
+        <input type="button" value="Hold her tighter, she's a fighter" id="adminButton" onclick="window.location.href = '/client/admin.html'">
+    </div>
+    <div class="genericDiv">
+        <input type="button" value="The overnighter" id="quizButton" onclick="window.location.href = '/client/quiz.html'">
+    </div>
+</div>
+
+<div id="loggedInDetails"></div>
 </body>
+
 </html>
