@@ -46,7 +46,6 @@ public class ToolManagement {
         System.out.println("thing/list");
         JSONArray list = new JSONArray();
         try {
-
             PreparedStatement ps = Main.db.prepareStatement("SELECT ToolName, ToolList FROM Tools WHERE ToolNameID = ?");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -95,6 +94,29 @@ public class ToolManagement {
         } catch (Exception exception) {
             System.out.println("Database disconnection error: " + exception.getMessage());
             return "{\"error\": \"Unable to delete item, please see server console for more info.\"}";
+        }
+    }
+    @GET
+    @Path("listAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String readAllTools() {
+        System.out.println("thing/list");
+        JSONArray list = new JSONArray();
+        try {
+            PreparedStatement ps = Main.db.prepareStatement("SELECT ToolName, ToolList FROM Tools");
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                JSONObject item = new JSONObject();
+                item.put("name", results.getString(1));
+                item.put("ToolList", results.getString(2));
+                list.add(item);
+            }
+            return list.toString();
+
+
+        } catch (Exception exception) {
+            System.out.println("Database disconnection error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
         }
     }
 }

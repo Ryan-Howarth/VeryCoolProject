@@ -1,15 +1,29 @@
 function pageLoad() {
+    viewQuiz();
+}
+function viewQuiz(){
+    let tableHTML = '<table>' +
+        '<tr>' +
+        '<th>Name</th>' +
+        '</tr>';
+debugger;
+    fetch("/Tools/listAll/",{method:'get'}
+    ).then(response=>response.json()
+    ).then(responseData=> {
+        console.log(responseData);
+        if (responseData.hasOwnProperty('error')) {
+            alert(responseData.error);
+        } else {
 
-    let now = new Date();
+            for (let quizNames of responseData){
+                tableHTML += `<tr>` +
+                    `<td>${quizNames.name}</td>` +
+                    `</tr>`;
+            }
+           tableHTML += '</table>'
+        }
 
-    let myHTML = '<div style="text-align:center;">'
-        + '<h1></h1>'
-        + '<img  class = "image" src="/client/img/190107_abcnl_davis_hpMain_16x9_992.jpg" height="500"; width = "6000";   alt="Logo"/>'
-        + '<div style="font-style: bold;">'
-        + 'Generated at ' + now.toLocaleTimeString()
-        + '</div>'
-        + '</div>';
+        document.getElementById("tableHTML").innerHTML = tableHTML;
 
-    document.getElementById("testDiv").innerHTML = myHTML;
-    checkLogin()
+    })
 }

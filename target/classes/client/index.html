@@ -12,9 +12,17 @@
 <body onload="pageLoad()">
 <div id="content">
     <div id="testDiv"></div>
+    <div class="genericDiv">
+        <input type="button" value="Results" id="resultsButton" onclick="window.location.href = '/client/results.html'">
+    </div>
+    <div class="genericDiv">
+        <input type="button" value="Admin options" id="adminButton" onclick="window.location.href = '/client/admin.html'">
+    </div>
+    <div class="genericDiv">
+        <input type="button" value="Quizzes" id="quizButton" onclick="window.location.href = '/client/quiz.html'">
+    </div>
 </div>
-<input id="btntest" type="button" value="Really cool tutorial"
-       onclick="window.location.href = 'http://localhost:8081/client/quiz.html'" />
+
 <div id="loggedInDetails"></div>
 </body>
 

@@ -62,4 +62,10 @@ h1 {
 .image {
     style: "height=200px; width = 200px;"
 }
+.genericDiv {
+    font-size: 14pt;
+    margin-top: 40px;
+    margin-left: 15px;
+}
+
 
